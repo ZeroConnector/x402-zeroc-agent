@@ -41,29 +41,48 @@ This project is an adaptation and support tool for the **Zero Connector** librar
     Edit `.env`:
     *   `OPENROUTER_API_KEY`: Your API key from OpenRouter.
     *   `TREASURY_WALLET_ADDRESS`: The Solana wallet that will receive payments.
-    *   `SOLANA_RPC_URL`: (Optional) Custom RPC URL.
+    *   `SOLANA_RPC_URL`: (Optional) Custom RPC URL (Recommended for mainnet reliability).
 
-## Usage
+## Usage Guide
 
-### 1. Start the Server
-The server listens for payment-protected requests.
+### 1. Setup Client Wallet
+Before you can use the agent, the client needs a wallet with funds.
+
+1.  Run the client once to generate a new wallet file (`client-wallet.json`):
+    ```bash
+    node client.js "Init"
+    ```
+2.  The script will print your **Client Wallet Address**.
+3.  **Fund this wallet**:
+    *   Send ~0.002 SOL (for gas fees).
+    *   Send at least 0.1 USDC (for payments).
+
+### 2. Check Wallet Balance
+We provide a helper script to verify your client wallet has received the funds and the RPC can see them.
+
+```bash
+node check_balance.js
+```
+*   **Success**: Shows your SOL and USDC balance.
+*   **Failure**: If USDC balance is 0, wait for the transaction to confirm or check if you sent the correct token (Mainnet USDC).
+
+### 3. Start the Server
+The server listens for requests and gates them behind the x402 payment wall.
 
 ```bash
 node server.js
 ```
+*   The server runs on port 3000 by default.
+*   Keep this terminal open.
 
-### 2. Run the Client
-The CLI client automatically handles wallet creation (if needed), checks for USDC balance, and performs the x402 payment flow.
-
-**Prerequisites for Client:**
-*   The client generates a local wallet in `client-wallet.json`.
-*   You must fund this wallet with **SOL** (for gas) and **USDC** (for payments).
+### 4. Run the AI Client
+In a new terminal, use the client to send prompts to the agent. The client automatically handles the 402 Payment Required response, signs the transaction, and resends the request with proof of payment.
 
 ```bash
 node client.js "How do I install Zero Connector?"
 ```
 
-**Example Output:**
+**Example Interaction:**
 ```text
 Client Wallet Address: 6NVm...
 Checking USDC account: ...
@@ -74,20 +93,24 @@ Payment verified!
 --- AI Response ---
 To install Zero Connector, run:
 npm install zero-connector
-
-For PostgreSQL support...
+...
 -------------------
 ```
+
+### Troubleshooting
+*   **Fetch failed**: Ensure `node server.js` is running in a separate terminal.
+*   **Insufficient USDC balance**: Run `node check_balance.js` to verify funds. Ensure you have the specific USDC Mainnet token (`EPjFW...`).
+*   **Transaction failed**: Ensure you have enough SOL for gas (~0.002 SOL recommended).
 
 ## Configuration
 
 ### Payment Settings
-Payment settings are configured in `server.js` and `client.js`:
+Payment settings are configured in `server.js`:
 *   **Token**: USDC (Mainnet)
-*   **Price**: Configurable (Default: 0.01 USDC)
+*   **Price**: Default is set to `0.01 USDC`. You can change `PRICE_MICRO_UNITS` in `server.js`.
 
-### System Prompt
-The AI's knowledge base is stored in `zeroc_docs.js`. You can update this file to feed new documentation into the agent.
+### AI Knowledge Base
+The AI's knowledge base is stored in `zeroc_docs.js`. Update this file to feed new documentation or context into the agent.
 
 ## License
 
