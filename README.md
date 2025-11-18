@@ -4,7 +4,7 @@ A specialized AI Agent protected by the **x402 Payment Protocol** on Solana. Thi
 
 Built with [PayAI](https://payai.network) (x402 protocol) and powered by OpenRouter.
 
-## 🚀 Features
+## Features
 
 *   **x402 Payment Protection**: API endpoints are gated by micropayments (USDC/SOL) on Solana.
 *   **Zero Connector Expert**: The AI system prompt is pre-loaded with the full [Zero Connector](https://github.com/zeroconnector) documentation.
@@ -13,19 +13,19 @@ Built with [PayAI](https://payai.network) (x402 protocol) and powered by OpenRou
     *   **Express Server**: Handles payment verification and AI routing.
     *   **CLI Client**: A reference implementation for interacting with the paid agent.
 
-## 🛠️ Zero Connector Integration
+## Zero Connector Integration
 
 This project is an adaptation and support tool for the **Zero Connector** library. It demonstrates how to build a paid AI service that specifically supports the Zero Connector ecosystem.
 
 **Zero Connector ($zeroc)** is a powerful authentication library for Solana wallets that allows password-protected wallets without browser extensions.
 *   **Pump.fun CA**: `6kP6Qjgo7Vke9HTe3tZ9DeRtKw2NDiE5fDABWEUspump`
 
-## 📦 Installation
+## Installation
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/yourusername/x402-agent.git
-    cd x402-agent
+    git clone https://github.com/ZeroConnector/x402-zeroc-agent.git
+    cd x402-zeroc-agent
     ```
 
 2.  **Install Dependencies**
@@ -43,7 +43,7 @@ This project is an adaptation and support tool for the **Zero Connector** librar
     *   `TREASURY_WALLET_ADDRESS`: The Solana wallet that will receive payments.
     *   `SOLANA_RPC_URL`: (Optional) Custom RPC URL.
 
-## 🏃 Usage
+## Usage
 
 ### 1. Start the Server
 The server listens for payment-protected requests.
@@ -79,7 +79,7 @@ For PostgreSQL support...
 -------------------
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Payment Settings
 Payment settings are configured in `server.js` and `client.js`:
@@ -89,12 +89,11 @@ Payment settings are configured in `server.js` and `client.js`:
 ### System Prompt
 The AI's knowledge base is stored in `zeroc_docs.js`. You can update this file to feed new documentation into the agent.
 
-## 📜 License
+## License
 
 MIT
 
-## 🔗 Links
+## Links
 
 *   [PayAI Network](https://payai.network)
 *   [Zero Connector](https://github.com/zeroconnector)
-
