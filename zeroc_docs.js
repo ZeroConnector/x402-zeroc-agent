@@ -58,7 +58,7 @@ console.log(authResult.sessionToken); // Session token for future requests
 
 // Get balance
 const balance = await connector.getBalance(result.publicKey);
-console.log(Balance: ${balance.balance.solBalance} SOL);
+console.log(\`Balance: \${balance.balance.solBalance} SOL\`);
 
 Storage Adapters
 JSON File Storage (Default)
